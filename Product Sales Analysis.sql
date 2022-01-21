@@ -34,6 +34,12 @@ WHERE Revenue IS NULL;
 SELECT Year_Purchase, SUM(Revenue), SUM(Quantity) FROM product_sales
 GROUP BY Year_Purchase;
 
+/*Gives the Average Yearly Revenue (using subqueries)*/
+SELECT AVG(Sum_Table) FROM (
+	SELECT Year_Purchase, SUM(Revenue) AS Sum_Table FROM product_sales
+    GROUP BY Year_Purchase) 
+Avg_Table;
+
 /*Gives the revenue and quantity of products sold per quarter*/
 SELECT Quarter_Purchase, SUM(Revenue), SUM(Quantity), Year_Purchase FROM product_sales
 GROUP BY Quarter_Purchase
@@ -60,9 +66,3 @@ SELECT DISTINCT(Product), SUM(Revenue), SUM(Quantity) FROM product_sales
 GROUP BY Product
 ORDER BY SUM(Quantity) DESC
 LIMIT 5;
-
-/*Gives the Average Yearly Revenue (using subqueries)*/
-SELECT AVG(Sum_Table) FROM (
-	SELECT Year_Purchase, SUM(Revenue) AS Sum_Table FROM product_sales
-    GROUP BY Year_Purchase) 
-Avg_Table;
